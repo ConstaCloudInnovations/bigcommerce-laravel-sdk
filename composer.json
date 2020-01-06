@@ -1,5 +1,5 @@
 {
-    "name": "laravel/bigcommerce",
+    "name": "laravel-sdk/bigcommerce",
     "description": "http request using guzzle",
     "authors": [{
         "name": "Madhu",
