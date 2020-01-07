@@ -1,97 +1,48 @@
-# How to create and publish a Laravel package on packagist
-A Laravel package is a set of reusable classes created to add extra functionality to a Laravel website. In clearer terms, a package is to Laravel, what plugins are to WordPress. The primary goal of Laravel packages is to reduce development time by making reusable features into a set of standalone classes that can be used within any Laravel project.
+# Laravel package for BIGCOMMERCE API integration. 
+> This is not a official doc
 
-[View tutorial](https://pusher.com/tutorials/publish-laravel-packagist)
-
-## Getting Started
-- Create a fresh laravel package
+## Installation
+- Run below command to install package in your laravel project.
 
 ```
-composer create-project --prefer-dist laravel/laravel packagetestapp
+composer require laravel-sdk/bigcommerce
 ```
-- change directory to the new folder
+- After installation Go to project config/app.php file and add below line in provider section
 
 ```
-cd packagetestapp
+Bigcommerce\BigcommerceServiceProvider::class,
 ```
 
-- When it's done you need to configure your env file and set your app key and other necessary details. In your terminal type:
+## API Specification
 
 ```
-cp .env.example .env
+This application adheres to the api specifications set us. This helps mix and match with laravel backend without conflicts.
 ```
-
-- generate the app key
-
-```
-php artisan key:generate
-```
-- create a folder called `packages`, then create a new folder called samuelayo. 
-> Note that you can subtitute samuelayo with your own vendor name. Be sure to change the refrence in every other aspect of the app
-
-- clone this repository to the newly created folder
-
-```
-git clone https://github.com/samuelayo/contact-form-package.git packages/samuelayo/contactform
-```
-- Tell Laravel how to load our package and use it's functions, so inside the root of your Laravel app in the composer.json add this code:
-
-```
-
-"autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
-        "psr-4": {
-            "Samuelayo\\Contactform\\": "packages/samuelayo/contactform/src",
-            "App\\": "app/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Samuelayo\\Contactform\\": "packages/samuelayo/contactform/src",
-            "Tests\\": "tests/"
-        }
-    },
-```
-- Dump the composer autoloader
-
-```
-composer dump-autoload
-```
-
-- Next, we need to add our new Service Provider in our `config/app.php` inside the `providers` array:
-
-```
-'providers' => [
-         ...,
-            App\Providers\RouteServiceProvider::class,
-            // Our new package class
-            Samuelayo\Contactform\ContactFormServiceProvider::class,
-        ],
-```
-- Migrate the database tables
-
-```
-php artisan migrate
-```
-
-And finally, start the application by running:
-
-```
-php artisan serve
-```
-
-Visit http://localhost:8000/contact in your browser to view the demo.
-
-If you want to include the project as a package to your app, run:
-
-```
-composer require samuelayo/contactform
-```
-
-## Built With
-
-* [Laravel](https://laravel.com/) - The PHP framework for web artisans.
+[More information regarding the project can be found here](https://github.com/ConstaCloudInnovations/bigcommerce-laravel-sdk)
         
+
+# Code overview
+
+## Dependencies
+
+- guzzlehttp 
+```
+A Guzzle is a PHP HTTP client that makes it easy to send HTTP requests with data, headers and trivial to integrate with web services. Guzzle is a simple interface for building query strings, POST requests, streaming large uploads, streaming large downloads, using HTTP cookies, uploading JSON data, etc.
+```
+
+## Environment variables
+
+- .env 
+
+```
+Environment variables can be set in this file.you need to set three environment variable like given below example with dummy data.
+```
+- AUTH_TOKEN = "g34zmq36hfo0frsgil0uhgj7ylvvgzvt" 
+AUTH_CLIENT = "pi6liqvcvbcveuu44bzr3hw00ie5ukxi9v2m"
+STORE_HASH = "kmvyc5bz" 
+
+
+
+# Routes
+* [getallproducts] - To get all products you can use pagination like (http://127.0.0.1:8000/getallproduct?page=1&limit=10).
+* [getproductsbyid] - To get single product (http://127.0.0.1:8000/getproductbyid?product_id=1272).
